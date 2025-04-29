@@ -1,29 +1,18 @@
-import React from "react";
+import React from 'react'
+import Navbar from './Navbar'
+import {assets} from '../assets/assets'
+
 
 const Header = () => {
   return (
-    <>
-      <div className="bg-red-50 m-0 caret-amber-300 flex justify-between items-center p-8">
-        <navbar>
-          <ul className="flex flex-row gap-4 p-0 m-0 text-3xl justify-between items-center">
-            <li className="list-none text-black font-semibold antialiased font-stretch-extra-condensed underline decoration-1">
-              Home
-            </li>
-            <li className="list-none text-black font-semibold antialiased font-stretch-extra-condensed underline decoration-1">
-              About
-            </li>
-            <li className="list-none text-black font-semibold antialiased font-stretch-extra-condensed underline decoration-1">
-              Services
-            </li>
-            <li className="list-none text-black font-semibold antialiased font-stretch-extra-condensed underline decoration-1">
-              Contact
-            </li>
-          </ul>
-        </navbar>
-        Header
-      </div>
-    </>
-  );
-};
+    <div className='min-h-screen mb-4 bg-cover bg-center flex items-center w-full overflow-hidden'>
+      <img src={assets.header} alt="header" className='w-full h-full object-cover absolute -z-10' />
+      
+      <Navbar/>
 
-export default Header;
+
+    </div>
+  )
+}
+
+export default Header
