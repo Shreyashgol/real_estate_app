@@ -7,7 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Header from "./components/Header";
 import About from "./components/About";
-import Projects from "./components/Projects";
 import PropertySearch from "./components/PropertySearch";
 import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
@@ -20,11 +19,9 @@ function App() {
       <Header/>
       <PropertySearch/>
       <About/>
-      <Projects/>
       <Testimonials/>
       <Contact/>
       <Footer/>
-      
     </>
   );
 }

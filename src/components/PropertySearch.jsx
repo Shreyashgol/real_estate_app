@@ -2,7 +2,6 @@ import React, { useState, useMemo } from "react";
 import {housesData} from "../data"; 
 import {motion} from "framer-motion"
 
-
 const PropertySearch = () => {
   const [filters, setFilters] = useState({
     location: "",
@@ -28,6 +27,7 @@ const PropertySearch = () => {
       whileInView={{opacity:1, x:0}}
       viewport={{once: true}}
     className="max-w-6xl mx-auto p-4">
+      
       <h1 className="text-3xl font-bold mb-4">Property Search</h1>
 
       {/* Filter Controls */}
