@@ -1,5 +1,7 @@
 import React, { useState, useMemo } from "react";
-import {housesData} from "../data"; // Adjust the path as needed
+import {housesData} from "../data"; 
+import {motion} from "framer-motion"
+
 
 const PropertySearch = () => {
   const [filters, setFilters] = useState({
@@ -20,7 +22,12 @@ const PropertySearch = () => {
   }, [filters]);
 
   return (
-    <div className="max-w-6xl mx-auto p-4">
+    <motion.div 
+    initial = {{opacity:0, x:200}}
+      transition={{duration:2}}
+      whileInView={{opacity:1, x:0}}
+      viewport={{once: true}}
+    className="max-w-6xl mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Property Search</h1>
 
       {/* Filter Controls */}
@@ -81,7 +88,7 @@ const PropertySearch = () => {
       {filteredHouses.length === 0 && (
         <p className="text-center text-gray-500 mt-8">No properties found matching your criteria.</p>
       )}
-    </div>
+    </motion.div>
   );
 };
 
