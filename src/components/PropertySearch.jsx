@@ -56,7 +56,7 @@ const PropertySearch = () => {
         >
           <option value="">All Types</option>
           <option value="House">House</option>
-          <option value="Apartment">Apartment</option>
+          <option value="Apartament">Apartament</option>
         </select>
 
         <input
