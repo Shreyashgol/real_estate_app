@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
-import {housesData} from "../data"; 
-import {motion} from "framer-motion"
+import { housesData } from "../data";
+import { motion } from "framer-motion";
 
 const PropertySearch = () => {
   const [filters, setFilters] = useState({
@@ -12,23 +12,32 @@ const PropertySearch = () => {
 
   const filteredHouses = useMemo(() => {
     return housesData.filter((house) => {
-      const matchesLocation = !filters.location || house.address.toLowerCase().includes(filters.location.toLowerCase());
+      const matchesLocation =
+        !filters.location ||
+        house.address.toLowerCase().includes(filters.location.toLowerCase());
       const matchesType = !filters.type || house.type === filters.type;
-      const matchesMinPrice = !filters.minPrice || house.price >= parseInt(filters.minPrice);
-      const matchesMaxPrice = !filters.maxPrice || house.price <= parseInt(filters.maxPrice);
-      return matchesLocation && matchesType && matchesMinPrice && matchesMaxPrice;
+      const matchesMinPrice =
+        !filters.minPrice || house.price >= parseInt(filters.minPrice);
+      const matchesMaxPrice =
+        !filters.maxPrice || house.price <= parseInt(filters.maxPrice);
+      return (
+        matchesLocation && matchesType && matchesMinPrice && matchesMaxPrice
+      );
     });
   }, [filters]);
 
   return (
-    <motion.div 
-    initial = {{opacity:0, x:200}}
-      transition={{duration:2}}
-      whileInView={{opacity:1, x:0}}
-      viewport={{once: true}}
-    className="max-w-6xl mx-auto p-4">
-      
-      <h1 className="text-3xl font-bold mb-4">Property Search</h1>
+    <motion.div
+      initial={{ opacity: 0, x: 200 }}
+      transition={{ duration: 2 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      className="max-w-6xl my-20 mx-auto p-4"
+      id="PropertySearch"
+    >
+      <h1 className="text-5xl sm:text-4xl  font-bold mb-30 text-center">
+        PropertySearch
+      </h1>
 
       {/* Filter Controls */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
@@ -68,9 +77,12 @@ const PropertySearch = () => {
       </div>
 
       {/* Properties List */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3  gap-6">
         {filteredHouses.map((house) => (
-          <div key={house.id} className="border rounded-lg p-4 shadow hover:shadow-lg transition">
+          <div
+            key={house.id}
+            className="border rounded-lg p-4 shadow hover:shadow-lg transition"
+          >
             <img
               src={house.image}
               alt={house.name}
@@ -79,14 +91,20 @@ const PropertySearch = () => {
             <h2 className="text-xl font-semibold">{house.name}</h2>
             <h2 className="text-xl font-semibold">{house.country}</h2>
             <p className="text-gray-600">{house.address}</p>
-            <p className="mt-1 font-bold text-green-600">${house.price.toLocaleString()}</p>
-            <p className="text-sm text-gray-500">{house.type} · {house.bedrooms} Beds · {house.bathrooms} Baths</p>
+            <p className="mt-1 font-bold text-green-600">
+              ${house.price.toLocaleString()}
+            </p>
+            <p className="text-sm text-gray-500">
+              {house.type} · {house.bedrooms} Beds · {house.bathrooms} Baths
+            </p>
           </div>
         ))}
       </div>
 
       {filteredHouses.length === 0 && (
-        <p className="text-center text-gray-500 mt-8">No properties found matching your criteria.</p>
+        <p className="text-center text-gray-500 mt-8">
+          No properties found matching your criteria.
+        </p>
       )}
     </motion.div>
   );
