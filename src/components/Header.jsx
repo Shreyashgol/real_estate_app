@@ -23,7 +23,7 @@ const Header = () => {
         </h2>
         <div className="space-x-6 mt-16">
           <a
-            href="#ProjectSearch"
+            href="#PropertySearch"
             className="border border-white px-8 py-3 rounded"
           >
             Project Search

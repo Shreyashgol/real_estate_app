@@ -1,9 +1,17 @@
 import React, { useState, useMemo } from "react";
 import { housesData } from "../data";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const PropertySearch = () => {
-  const [filters, setFilters] = useState({
+  const [inputFilters, setInputFilters] = useState({
+    location: "",
+    type: "",
+    minPrice: "",
+    maxPrice: "",
+  });
+
+  const [appliedFilters, setAppliedFilters] = useState({
     location: "",
     type: "",
     minPrice: "",
@@ -13,18 +21,22 @@ const PropertySearch = () => {
   const filteredHouses = useMemo(() => {
     return housesData.filter((house) => {
       const matchesLocation =
-        !filters.location ||
-        house.address.toLowerCase().includes(filters.location.toLowerCase());
-      const matchesType = !filters.type || house.type === filters.type;
+        !appliedFilters.location ||
+        house.address.toLowerCase().includes(appliedFilters.location.toLowerCase());
+      const matchesType = !appliedFilters.type || house.type === appliedFilters.type;
       const matchesMinPrice =
-        !filters.minPrice || house.price >= parseInt(filters.minPrice);
+        !appliedFilters.minPrice || house.price >= parseInt(appliedFilters.minPrice);
       const matchesMaxPrice =
-        !filters.maxPrice || house.price <= parseInt(filters.maxPrice);
+        !appliedFilters.maxPrice || house.price <= parseInt(appliedFilters.maxPrice);
       return (
         matchesLocation && matchesType && matchesMinPrice && matchesMaxPrice
       );
     });
-  }, [filters]);
+  }, [appliedFilters]);
+
+  const handleSearch = () => {
+    setAppliedFilters({ ...inputFilters });
+  };
 
   return (
     <motion.div
@@ -35,23 +47,27 @@ const PropertySearch = () => {
       className="max-w-6xl my-20 mx-auto p-4"
       id="PropertySearch"
     >
-      <h1 className="text-5xl sm:text-4xl  font-bold mb-30 text-center">
+      <h1 className="text-5xl sm:text-4xl font-bold mb-8 text-center">
         PropertySearch
       </h1>
 
       {/* Filter Controls */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
         <input
           type="text"
           placeholder="Search by location"
-          value={filters.location}
-          onChange={(e) => setFilters({ ...filters, location: e.target.value })}
+          value={inputFilters.location}
+          onChange={(e) =>
+            setInputFilters({ ...inputFilters, location: e.target.value })
+          }
           className="border p-2 rounded"
         />
 
         <select
-          value={filters.type}
-          onChange={(e) => setFilters({ ...filters, type: e.target.value })}
+          value={inputFilters.type}
+          onChange={(e) =>
+            setInputFilters({ ...inputFilters, type: e.target.value })
+          }
           className="border p-2 rounded"
         >
           <option value="">All Types</option>
@@ -62,42 +78,52 @@ const PropertySearch = () => {
         <input
           type="number"
           placeholder="Min Price"
-          value={filters.minPrice}
-          onChange={(e) => setFilters({ ...filters, minPrice: e.target.value })}
+          value={inputFilters.minPrice}
+          onChange={(e) =>
+            setInputFilters({ ...inputFilters, minPrice: e.target.value })
+          }
           className="border p-2 rounded"
         />
 
         <input
           type="number"
           placeholder="Max Price"
-          value={filters.maxPrice}
-          onChange={(e) => setFilters({ ...filters, maxPrice: e.target.value })}
+          value={inputFilters.maxPrice}
+          onChange={(e) =>
+            setInputFilters({ ...inputFilters, maxPrice: e.target.value })
+          }
           className="border p-2 rounded"
         />
+
+        <button
+          onClick={handleSearch}
+          className="bg-blue-600 text-white rounded p-2 hover:bg-blue-700"
+        >
+          Search
+        </button>
       </div>
 
       {/* Properties List */}
-      <div className="grid grid-cols-1 md:grid-cols-3  gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {filteredHouses.map((house) => (
-          <div
-            key={house.id}
-            className="border rounded-lg p-4 shadow hover:shadow-lg transition"
-          >
-            <img
-              src={house.image}
-              alt={house.name}
-              className="w-full h-48 object-cover rounded mb-2"
-            />
-            <h2 className="text-xl font-semibold">{house.name}</h2>
-            <h2 className="text-xl font-semibold">{house.country}</h2>
-            <p className="text-gray-600">{house.address}</p>
-            <p className="mt-1 font-bold text-green-600">
-              ${house.price.toLocaleString()}
-            </p>
-            <p className="text-sm text-gray-500">
-              {house.type} · {house.bedrooms} Beds · {house.bathrooms} Baths
-            </p>
-          </div>
+          <Link to={`/property/${house.id}`} key={house.id}>
+            <div className="border rounded-lg p-4 shadow hover:shadow-lg transition cursor-pointer">
+              <img
+                src={house.image}
+                alt={house.name}
+                className="w-full h-48 object-cover rounded mb-2"
+              />
+              <h2 className="text-xl font-semibold">{house.name}</h2>
+              <h2 className="text-xl font-semibold">{house.country}</h2>
+              <p className="text-gray-600">{house.address}</p>
+              <p className="mt-1 font-bold text-green-600">
+                ${house.price.toLocaleString()}
+              </p>
+              <p className="text-sm text-gray-500">
+                {house.type} · {house.bedrooms} Beds · {house.bathrooms} Baths
+              </p>
+            </div>
+          </Link>
         ))}
       </div>
 
@@ -111,3 +137,5 @@ const PropertySearch = () => {
 };
 
 export default PropertySearch;
+
+
