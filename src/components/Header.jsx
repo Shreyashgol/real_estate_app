@@ -2,6 +2,9 @@ import React from "react";
 import Navbar from "./Navbar";
 import { assets } from "../assets/assets";
 import { motion } from "framer-motion";
+// ✅ remove Router, Routes, Route import
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Link } from "react-router-dom"; // ✅ import Link if needed
 
 const Header = () => {
   return (
@@ -22,23 +25,20 @@ const Header = () => {
           Explore Homes and Properties that fit for you
         </h2>
         <div className="space-x-6 mt-16">
-          <a
-            href="#PropertySearch"
-            className="border border-white px-8 py-3 rounded"
-          >
+          <a href="#PropertySearch" className="border border-white px-8 py-3 rounded">
             Project Search
           </a>
-          <a
-            href="#Contact"
-            className="bg-blue-600 border-white px-8 py-3 rounded"
-          >
+          <a href="#Contact" className="bg-blue-600 border-white px-8 py-3 rounded">
             Contact Us
           </a>
         </div>
       </motion.div>
+
+      {/* ✅ Just use Navbar — remove extra <Router> */}
       <Navbar />
     </div>
   );
 };
 
 export default Header;
+

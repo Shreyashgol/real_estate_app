@@ -1,10 +1,6 @@
-import { useState } from "react";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import { Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 import Header from "./components/Header";
 import About from "./components/About";
@@ -13,26 +9,30 @@ import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import PropertyDetails from "./components/PropertyDetails";
-
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
     <>
-    <ToastContainer />
-      <Header/>
-      <Router>
+      <ToastContainer />
+      <Header />
+
       <Routes>
         <Route path="/" element={<PropertySearch />} />
         <Route path="/property/:id" element={<PropertyDetails />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
-    </Router>
-      <About/>
-      <Testimonials/>
-      <Contact/>
-      <Footer/>
-      
+
+      <About />
+      <Testimonials />
+      <Contact />
+      <Footer />
     </>
   );
 }
 
 export default App;
+
+
