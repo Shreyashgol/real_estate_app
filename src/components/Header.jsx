@@ -2,9 +2,7 @@ import React from "react";
 import Navbar from "./Navbar";
 import { assets } from "../assets/assets";
 import { motion } from "framer-motion";
-// ✅ remove Router, Routes, Route import
-// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Link } from "react-router-dom"; // ✅ import Link if needed
+
 
 const Header = () => {
   return (

@@ -1,4 +1,3 @@
-// src/pages/Signup.jsx
 import { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
@@ -15,7 +14,7 @@ const Signup = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       toast.success('Signup successful!');
-      navigate('/'); // redirect to homepage or dashboard
+      navigate('/'); 
     } catch (err) {
       toast.error(err.message || 'Signup failed!');
     }

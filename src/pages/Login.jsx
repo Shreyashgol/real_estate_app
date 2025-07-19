@@ -14,7 +14,7 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       toast.success('Login successful!');
-      navigate('/'); // ✅ redirect to home or dashboard
+      navigate('/'); 
     } catch (err) {
       toast.error(err.message || 'Login failed!');
     }
